@@ -3,10 +3,10 @@ defmodule IslandsEngine.Board do
   Represents the playing board upon which the game is played.
   Board orchestrates and actions which involve islands.
   """
-  
-  alias IslandsEngine.{Island, Coordinate}
 
-  def new(), do: %{}
+  alias IslandsEngine.{Coordinate, Island}
+
+  def new, do: %{}
 
   def position_island(board, key, %Island{} = island) do
     case overlaps_existing_island?(board, key, island) do
