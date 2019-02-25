@@ -1,4 +1,9 @@
 defmodule IslandsEngine.Board do
+  @moduledoc """
+  Represents the playing board upon which the game is played.
+  Board orchestrates and actions which involve islands.
+  """
+  
   alias IslandsEngine.{Island, Coordinate}
 
   def new(), do: %{}

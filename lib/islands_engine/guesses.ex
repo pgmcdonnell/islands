@@ -1,4 +1,8 @@
 defmodule IslandsEngine.Guesses do
+  @moduledoc """
+  Struct to represent and functions to handle player's guesses.
+  """
+
   alias IslandsEngine.{Coordinate, Guesses}
 
   @enforce_keys [:hits, :misses]
