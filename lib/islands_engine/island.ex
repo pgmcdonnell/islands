@@ -46,7 +46,7 @@ defmodule IslandsEngine.Island do
   def types, do: [:atoll, :dot, :l_shape, :s_shape, :square]
 
   defp offsets(:square), do: [{0, 0}, {0, 1}, {1, 0}, {1, 1}]
-  defp offsets(:atol), do: [{0, 0}, {0, 1}, {1, 1}, {2, 0}, {2, 1}]
+  defp offsets(:atoll), do: [{0, 0}, {0, 1}, {1, 1}, {2, 0}, {2, 1}]
   defp offsets(:dot), do: [{0, 0}]
   defp offsets(:l_shape), do: [{0, 0}, {1, 0}, {2, 0}, {2, 1}]
   defp offsets(:s_shape), do: [{0, 1}, {0, 2}, {1, 0}, {1, 1}]
