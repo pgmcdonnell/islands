@@ -14,6 +14,15 @@ defmodule IslandTest do
     test "cannot add island when it goes off the board" do
       assert {:error, :invalid_coordinate} = Island.new(:atoll, @bottom_right_coord)
     end
+    test "island has correct coordinates when added" do
+      {:ok, island} = Island.new(:square, @top_left_coords)
+      expected = MapSet.new()
+                  |> MapSet.put(%Coordinate{col: 1, row: 1})
+                  |> MapSet.put(%Coordinate{col: 1, row: 2})
+                  |> MapSet.put(%Coordinate{col: 2, row: 1})
+                  |> MapSet.put(%Coordinate{col: 2, row: 2})
+      assert expected == island.coordinates
+    end
   end
 
   describe "checking for overlaps" do
@@ -32,12 +41,12 @@ defmodule IslandTest do
   describe "Guessing coordinates" do
     test "returns hit when we guess correctly" do
       {:ok, island} = Island.new(:atoll, @top_left_coords)
-      {:ok, guess} = Coordinate.new(1,2)
+      {:ok, guess} = Coordinate.new(1, 2)
       assert {:hit, %Island{} = island} = Island.guess(island, guess)
     end
     test "returns miss when we guess incorrectly" do
       {:ok, island} = Island.new(:atoll, @top_left_coords)
-      {:ok, guess} = Coordinate.new(2,1)
+      {:ok, guess} = Coordinate.new(2, 1)
       assert :miss = Island.guess(island, guess)
     end
   end
@@ -45,7 +54,7 @@ defmodule IslandTest do
   describe "checking if an island is forested" do
     test "returns true when the island is forested" do
       {:ok, new_island} = Island.new(:dot, @top_left_coords)
-      {:ok, accurate_guess} = Coordinate.new(1,1)
+      {:ok, accurate_guess} = Coordinate.new(1, 1)
       {:hit, hit_island} = Island.guess(new_island, accurate_guess)
       assert true == Island.forested?(hit_island)
     end
