@@ -21,23 +21,30 @@ defmodule GameTest do
   end
 
   describe "positioning an island" do
-    test "when the island and coordinates are valid", %{game: game} do
+    test "works when the island and coordinates are valid", %{game: game} do
       assert :ok == Game.add_player(game, "Wilma")
       assert :ok == Game.position_island(game, :player1, :atoll, 1, 1)
     end
 
-    test "when the island coordinates are wrong", %{game: game} do
+    test "fails when the island coordinates are wrong", %{game: game} do
       assert :ok == Game.add_player(game, "Wilma")
       assert {:error, :invalid_coordinate} == Game.position_island(game, :player1, :atoll, 10, 10)
     end
 
-    test "when the island is unknown type", %{game: game} do
+    test "fails when the island is unknown type", %{game: game} do
       assert :ok == Game.add_player(game, "Wilma")
       assert {:error, :invalid_island_type} == Game.position_island(game, :player1, :wrong, 5, 5)
+    end
+
+    test "fails when the game is not in set_islands state", %{game: game} do
+      assert :error == Game.position_island(game, :player1, :atoll, 5, 5)
     end
   end
 
   describe "setting islands" do
+    test "is denied before we add a second player", %{game: game} do
+      assert :error == Game.set_islands(game, :player1)
+    end
     test "is denied before positioning all islands", %{game: game} do
       Game.add_player(game, "Wilma")
       Game.position_island(game, :player1, :atoll, 1, 1)
