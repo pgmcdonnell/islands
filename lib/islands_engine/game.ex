@@ -8,7 +8,7 @@ defmodule IslandsEngine.Game do
   alias IslandsEngine.{Board, Coordinate, Guesses, Island, Rules}
 
   @players [:player1, :player2]
-  @timeout 60 * 60 *24 * 1000
+  @timeout 60 * 60 * 24 * 1000
 
   def start_link(name) when is_binary(name) do
     GenServer.start_link(__MODULE__, name, name: via_tuple(name))

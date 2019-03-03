@@ -1,4 +1,8 @@
 defmodule IslandsEngine.GameSupervisor do
+  @moduledoc """
+  A simple one for one supervisor for Game processes.
+  """
+
   use Supervisor
 
   alias IslandsEngine.Game
